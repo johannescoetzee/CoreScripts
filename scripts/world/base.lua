@@ -321,6 +321,10 @@ function BaseWorld:SaveTopics(pid)
     stateHelper:SaveTopics(pid, self)
 end
 
+function BaseWorld:SaveTopicInfo(pid)
+    stateHelper:SaveTopicInfo(pid, self)
+end
+
 function BaseWorld:SaveBounty(pid)
     stateHelper:SaveBounty(pid, self)
 end

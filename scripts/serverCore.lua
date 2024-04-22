@@ -467,6 +467,11 @@ function OnPlayerTopic(pid)
     eventHandler.OnPlayerTopic(pid)
 end
 
+function OnPlayerTopicInfo(pid)
+    tes3mp.LogMessage(enumerations.log.INFO, "Called \"OnPlayerTopicInfo\" for " .. logicHandler.GetChatName(pid))
+    eventHandler.OnPlayerTopicInfo(pid)
+end
+
 function OnPlayerBounty(pid)
     tes3mp.LogMessage(enumerations.log.INFO, "Called \"OnPlayerBounty\" for " .. logicHandler.GetChatName(pid))
     eventHandler.OnPlayerBounty(pid)

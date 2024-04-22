@@ -37,6 +37,7 @@ end
 
 function World:QuicksaveToDrive()
     if self.hasEntry then
+        tes3mp.LogMessage(enumerations.log.INFO, "Quicksaved world")
         jsonInterface.quicksave("world/" .. self.coreVariablesFile, self.coreVariables)
         jsonInterface.quicksave("world/" .. self.worldFile, self.data)
     end

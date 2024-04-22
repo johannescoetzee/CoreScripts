@@ -1110,6 +1110,25 @@ eventHandler.OnPlayerTopic = function(pid)
     end
 end
 
+eventHandler.OnPlayerTopicInfo = function(pid)
+    if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+        local eventStatus = customEventHooks.triggerValidators("OnPlayerTopicInfo", {pid})
+        
+        if eventStatus.validDefaultHandler then
+            if config.shareTopics == true then
+                WorldInstance:SaveTopicInfo(pid)
+                -- Send this PlayerTopic packet to other players (sendToOthersPlayers is true),
+                -- but skip sending it to the player we got it from (skipAttachedPlayer is true)
+                tes3mp.SendTopicInfoChanges(pid, true, true)
+            else
+                Players[pid]:SaveTopicInfo()
+            end
+        end
+        
+        customEventHooks.triggerHandlers("OnPlayerTopicInfo", eventStatus, {pid})
+    end
+end
+
 eventHandler.OnPlayerBounty = function(pid)
     if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
         

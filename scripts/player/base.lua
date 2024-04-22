@@ -1469,6 +1469,10 @@ function BasePlayer:SaveTopics()
     stateHelper:SaveTopics(self.pid, self)
 end
 
+function BasePlayer:SaveTopicInfo()
+    stateHelper:SaveTopicInfo(self.pid, self)
+end
+
 function BasePlayer:LoadBounty()
     stateHelper:LoadBounty(self.pid, self)
 end

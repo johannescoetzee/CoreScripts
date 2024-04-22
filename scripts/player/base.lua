@@ -272,6 +272,12 @@ function BasePlayer:FinishLogin()
             self:LoadTopics()
         end
 
+        if config.shareTopics == true then
+            WorldInstance:LoadTopicInfo(self.pid)
+        else
+            self:LoadTopicInfo()
+        end
+
         if config.shareBounty == true then
             WorldInstance:LoadBounty(self.pid)
         else
@@ -378,6 +384,10 @@ function BasePlayer:EndCharGen()
 
     if config.shareTopics == true then
         WorldInstance:LoadTopics(self.pid)
+    end
+
+    if config.shareTopics == true then
+        WorldInstance:LoadTopicInfo(self.pid)
     end
 
 	if config.shareKills == true then
@@ -1463,6 +1473,10 @@ end
 
 function BasePlayer:LoadTopics()
     stateHelper:LoadTopics(self.pid, self)
+end
+
+function BasePlayer:LoadTopicInfo()
+    stateHelper:LoadTopicInfo(self.pid, self)
 end
 
 function BasePlayer:SaveTopics()

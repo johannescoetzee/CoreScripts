@@ -215,6 +215,10 @@ function BaseWorld:LoadTopics(pid)
     stateHelper:LoadTopics(pid, self)
 end
 
+function BaseWorld:LoadTopicInfo(pid)
+    stateHelper:LoadTopicInfo(pid, self)
+end
+
 function BaseWorld:LoadBounty(pid)
     stateHelper:LoadBounty(pid, self)
 end

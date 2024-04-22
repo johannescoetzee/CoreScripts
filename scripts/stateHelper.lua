@@ -96,11 +96,27 @@ function StateHelper:LoadTopics(pid, stateObject)
     tes3mp.ClearTopicChanges(pid)
 
     for index, topicId in pairs(stateObject.data.topics) do
-
+        tes3mp.LogMessage(enumerations.log.INFO, "Loading topic info: " .. topicInfo[1] .. " " .. topicInfo[2] .. " " .. topicInfo[3])
         tes3mp.AddTopic(pid, topicId)
     end
 
     tes3mp.SendTopicChanges(pid)
+end
+
+function StateHelper:LoadTopicInfo(pid, stateObject)
+
+    if stateObject.data.topicInfo == nil then
+        stateObject.data.topicInfo = {}
+    end
+
+    tes3mp.ClearTopicInfoChanges(pid)
+
+    for index, topicInfo in pairs(stateObject.data.topicInfo) do
+        tes3mp.LogMessage(enumerations.log.INFO, "Adding topic info: " .. topicInfo[1] .. " " .. topicInfo[2] .. " " .. topicInfo[3])
+        tes3mp.AddTopicInfo(pid, topicInfo[1], topicInfo[2], topicInfo[3])
+    end
+
+    tes3mp.SendTopicInfoChanges(pid)
 end
 
 function StateHelper:LoadBounty(pid, stateObject)
@@ -300,12 +316,10 @@ function StateHelper:SaveTopics(pid, stateObject)
         local topicId = tes3mp.GetTopicId(pid, i)
 
         if not tableHelper.containsValue(stateObject.data.topics, topicId) then
-            tes3mp.LogMessage(enumerations.log.INFO, "Inserting topic " .. topicId)
             table.insert(stateObject.data.topics, topicId)
         end
     end
 
-    tes3mp.LogMessage(enumerations.log.INFO, "Saving topic ")
     stateObject:QuicksaveToDrive()
 end
 
@@ -323,16 +337,14 @@ function StateHelper:SaveTopicInfo(pid, stateObject)
         local infoId = tes3mp.GetTopicInfoInfoId(pid, i)
         local actorName = tes3mp.GetTopicInfoActorName(pid, i)
         
-        local topicInfo = topicId .. "," .. infoId .. "," .. actorName
+        local topicInfo = { topicId, infoId, actorName }
 
         if not tableHelper.containsValue(stateObject.data.topicInfo, topicInfo) then
-            tes3mp.LogMessage(enumerations.log.INFO, "Inserting topic info " .. topicInfo)
             table.insert(stateObject.data.topicInfo, topicInfo)
         end
 
     end
 
-    tes3mp.LogMessage(enumerations.log.INFO, "Saving topic info ")
     stateObject:QuicksaveToDrive()
 end
 

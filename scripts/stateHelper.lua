@@ -110,7 +110,6 @@ function StateHelper:LoadTopicInfo(pid, stateObject)
 
     for index, topicInfo in pairs(stateObject.data.topicInfo) do
         tes3mp.ClearTopicInfoChanges(pid)
-        tes3mp.LogMessage(enumerations.log.INFO, "Adding topic info: " .. topicInfo[1] .. " " .. topicInfo[2] .. " " .. topicInfo[3])
         tes3mp.AddTopicInfo(pid, topicInfo[1], topicInfo[2], topicInfo[3])
         tes3mp.SendTopicInfoChanges(pid)
     end

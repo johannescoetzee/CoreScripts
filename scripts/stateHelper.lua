@@ -108,8 +108,6 @@ function StateHelper:LoadTopicInfo(pid, stateObject)
         stateObject.data.topicInfo = {}
     end
 
-
-
     for index, topicInfo in pairs(stateObject.data.topicInfo) do
         tes3mp.ClearTopicInfoChanges(pid)
         tes3mp.LogMessage(enumerations.log.INFO, "Adding topic info: " .. topicInfo[1] .. " " .. topicInfo[2] .. " " .. topicInfo[3])
@@ -339,7 +337,16 @@ function StateHelper:SaveTopicInfo(pid, stateObject)
         
         local topicInfo = { topicId, infoId, actorName }
 
-        if not tableHelper.containsValue(stateObject.data.topicInfo, topicInfo) then
+        local foundMatch = false
+
+        for key, value in pairs(stateObject.data.topicInfo) do
+            if (value[1] == topicId and value[2] == infoId and value[3] == actorName) then
+                foundMatch = true
+                break
+            end
+        end
+
+        if (not foundMatch) then
             table.insert(stateObject.data.topicInfo, topicInfo)
         end
 
